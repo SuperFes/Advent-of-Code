@@ -19,8 +19,6 @@ int main(void) {
             continue;
         }
 
-        std::cout << Left << " " << Right << " = " << Beach::RockPaperScissors::Roshambo(Left, Right) << std::endl;
-
         Total += Beach::RockPaperScissors::Roshambo(Left, Right);
     }
     while (!Guide.eof());
