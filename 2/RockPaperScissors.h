@@ -1,5 +1,5 @@
-#ifndef ROCKPAPARSCISSORS_H
-#define ROCKPAPARSCISSORS_H
+#ifndef RockPaperScissors_h
+#define RockPaperScissors_h
 
 #include <string>
 
@@ -34,4 +34,4 @@ namespace Beach {
 
 } // Beach
 
-#endif //ROCKPAPARSCISSORS_H
+#endif //RockPaperScissors_h
