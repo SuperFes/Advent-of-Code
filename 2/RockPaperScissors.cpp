@@ -16,7 +16,7 @@ namespace Beach {
     }
 
     auto RockPaperScissors::GetFormulaXValue(const unsigned int First, const std::string Right) -> unsigned int {
-        Bo Strategy;
+        Bo           Strategy;
         unsigned int ShamWow = 0;
 
         if (Right == "X") {
@@ -68,7 +68,7 @@ namespace Beach {
         unsigned int First;
         unsigned int Second;
 
-        First = GetValue(Left);
+        First  = GetValue(Left);
         Second = GetValue(Right);
 
         if (First == Second) {
@@ -107,7 +107,7 @@ namespace Beach {
         unsigned int First;
         unsigned int Second;
 
-        First = GetValue(Left);
+        First  = GetValue(Left);
         Second = GetFormulaXValue(First, Right);
 
         if (First == Second) {
