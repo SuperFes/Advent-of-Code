@@ -64,13 +64,7 @@ namespace Beach {
         return ShamWow;
     }
 
-    auto RockPaperScissors::Roshambo(const std::string& Left, const std::string& Right) -> unsigned int {
-        unsigned int First;
-        unsigned int Second;
-
-        First  = GetValue(Left);
-        Second = GetValue(Right);
-
+    auto RockPaperScissors::Calcubromulate(unsigned int First, unsigned int Second) -> unsigned int {
         if (First == Second) {
             return Bo::Draw + Second;
         }
@@ -103,6 +97,16 @@ namespace Beach {
         return -1;
     }
 
+    auto RockPaperScissors::Roshambo(const std::string& Left, const std::string& Right) -> unsigned int {
+        unsigned int First;
+        unsigned int Second;
+
+        First  = GetValue(Left);
+        Second = GetValue(Right);
+
+        return Calcubromulate(First, Second);
+    }
+
     auto RockPaperScissors::SlickRoshambo(const std::string& Left, const std::string& Right) -> unsigned int {
         unsigned int First;
         unsigned int Second;
@@ -110,35 +114,6 @@ namespace Beach {
         First  = GetValue(Left);
         Second = GetFormulaXValue(First, Right);
 
-        if (First == Second) {
-            return Bo::Draw + Second;
-        }
-
-        if (First == Rosham::Rock) {
-            if (Second == Rosham::Paper) {
-                return Bo::Win + Rosham::Paper;
-            }
-            else {
-                return Bo::Lose + Rosham::Scissors;
-            }
-        }
-        else if (First == Rosham::Paper) {
-            if (Second == Rosham::Scissors) {
-                return Bo::Win + Rosham::Scissors;
-            }
-            else {
-                return Bo::Lose + Rosham::Rock;
-            }
-        }
-        else if (First == Rosham::Scissors) {
-            if (Second == Rosham::Rock) {
-                return Bo::Win + Rosham::Rock;
-            }
-            else {
-                return Bo::Lose + Rosham::Paper;
-            }
-        }
-
-        return -1;
+        return Calcubromulate(First, Second);
     }
 } // Beach

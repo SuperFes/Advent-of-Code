@@ -24,6 +24,8 @@ namespace Beach {
 
         static auto GetFormulaXValue(const unsigned int Left, const std::string Right) -> unsigned int;
 
+        static auto Calcubromulate(unsigned int First, unsigned int Second) -> unsigned int;
+
       public:
         static auto Roshambo(const std::string& Left, const std::string& Right) -> unsigned int;
 
