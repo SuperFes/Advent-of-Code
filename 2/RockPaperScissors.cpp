@@ -15,7 +15,7 @@ namespace Beach {
         return Rosham::Unknown;
     }
 
-    auto RockPaperScissors::GetFormulaXValue(const unsigned int Left, const std::string Right) -> unsigned int {
+    auto RockPaperScissors::GetFormulaXValue(const unsigned int First, const std::string Right) -> unsigned int {
         Bo Strategy;
         unsigned int ShamWow = 0;
 
@@ -30,33 +30,33 @@ namespace Beach {
         }
 
         if (Strategy == Bo::Draw) {
-            return Left;
+            return First;
         }
 
         if (Strategy == Bo::Lose) {
-            if (Left == Rosham::Rock) {
+            if (First == Rosham::Rock) {
                 ShamWow = Rosham::Scissors;
             }
 
-            if (Left == Rosham::Paper) {
+            if (First == Rosham::Paper) {
                 ShamWow = Rosham::Rock;
             }
 
-            if (Left == Rosham::Scissors) {
+            if (First == Rosham::Scissors) {
                 ShamWow = Rosham::Paper;
             }
         }
 
         if (Strategy == Bo::Win) {
-            if (Left == Rosham::Rock) {
+            if (First == Rosham::Rock) {
                 ShamWow = Rosham::Paper;
             }
 
-            if (Left == Rosham::Paper) {
+            if (First == Rosham::Paper) {
                 ShamWow = Rosham::Scissors;
             }
 
-            if (Left == Rosham::Scissors) {
+            if (First == Rosham::Scissors) {
                 ShamWow = Rosham::Rock;
             }
         }
