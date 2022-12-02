@@ -1,7 +1,3 @@
-//
-// Created by Fester on 12/2/22.
-//
-
 #ifndef ROCKPAPARSCISSORS_H
 #define ROCKPAPARSCISSORS_H
 

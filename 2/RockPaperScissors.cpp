@@ -1,7 +1,3 @@
-//
-// Created by Fester on 12/2/22.
-//
-
 #include "RockPaperScissors.h"
 
 namespace Beach {
