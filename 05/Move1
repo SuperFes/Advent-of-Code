@@ -1,0 +1,104 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+use Data::Dumper;
+use POSIX qw/floor/;
+
+my $file = $ARGV[0];
+
+open(my $fh, '<:encoding(UTF-8)', $file)
+  or die "Could not open file '$file' $!";
+
+my $moving = 0;
+my $line;
+
+my @lines;
+my @moves;
+
+my @headStacks;
+
+my @stacks;
+
+while ($line = <$fh>) {
+    chomp $line;
+
+    if ($line eq "") {
+        $moving = 1;
+    }
+    elsif ($moving) {
+        push @moves, $line;
+    }
+    else {
+        push @lines, $line;
+    }
+}
+
+my $colNum = 0;
+
+foreach $line (@lines) {
+    if ($colNum == 0) {
+        my $len = length($line);
+
+        $len = floor($len / 4) + 1;
+
+        $colNum = $len;
+    }
+
+    if ($line =~ /\d/g) {
+        my $offset = 0;
+
+        my @cols;
+
+        for ($offset = 0; $offset < $colNum; $offset++) {
+            my $col = substr($line, ($offset * 4) + 1, 1);
+
+            $cols[$offset] = int($col);
+        }
+
+        foreach my $col (@cols) {
+            @stacks[$col] = $headStacks[$col];
+        }
+    }
+    else {
+        my $offset = 0;
+
+        for ($offset = 0; $offset < $colNum; $offset++) {
+            my $col = substr($line, ($offset * 4) + 1, 1);
+
+            my $soff = $offset + 1;
+
+            if (not $col eq ' ') {
+                unshift(@{$headStacks[$soff]}, $col) or @{$headStacks[$soff]} = ($col);
+            }
+        }
+    }
+}
+
+foreach my $move (@moves) {
+    my @oneMove = split(' ', $move);
+
+    my $times = $oneMove[1];
+    my $from  = $oneMove[3];
+    my $to    = $oneMove[5];
+
+    print "Move $times from $from to $to\n";
+
+    print Dumper, @{$stacks[$from]}, "\n", @{$stacks[$to]}, "\n";
+
+    for (my $i = 0; $i < $times; $i++) {
+        push(@{$stacks[$to]}, pop(@{$stacks[$from]}));
+
+        print Dumper, @{$stacks[$from]}, "\n", @{$stacks[$to]}, "\n";
+    }
+}
+
+for (my $stack = 1; $stack <= $colNum; $stack++) {
+    my $top = pop(@{$stacks[$stack]});
+    print $top;
+}
+
+print "\n";
+
+close $fh;
