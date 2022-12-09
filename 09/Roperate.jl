@@ -43,7 +43,6 @@ function count_positions(filename)
     f = open(filename)
 
     rope = [(0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)]
-    ropeChar = ["H", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
     positions = Set{Tuple{Int, Int}}()
 
@@ -74,6 +73,8 @@ function count_positions(filename)
 end
 
 function printBoard(rope, positions)
+    ropeChar = ["H", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
     for y = -80:80
         outLine = ""
 
@@ -99,6 +100,8 @@ function printBoard(rope, positions)
 
         println(outLine)
     end
+
+    sleep(0.005)
 end
 
 function move(position, direction)
