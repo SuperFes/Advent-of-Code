@@ -1,3 +1,4 @@
+#!/usr/bin/env scala
 import scala.io.Source
 
 object file extends App{
