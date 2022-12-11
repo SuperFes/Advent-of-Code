@@ -27,10 +27,10 @@ object file extends App{
         var under40 = cycle % 40;
 
         if (toCycle > 0 && under40 >= registerX && under40 <= registerX + 2) {
-           pixels += "#";
+           pixels += "🮋";
         }
         else {
-           pixels += ".";
+           pixels += " ";
         }
 
         toCycle -= 1;
