@@ -37,36 +37,60 @@ findChar c m = head [ (x,y) | (y,r) <- zip [0..] m, (x,c') <- zip [0..] r, c == 
 findPath :: Map -> Coord -> Coord -> Path
 findPath m s e = findPath' m s e [s]
     where
-        findPath' m s e p
-            | s == e = p
-            | nextCoord m s p == (-1, -1) = p
-            | (mapChar m s == mapChar m e) = p
-            | otherwise = findPath' m (nextCoord m s p) e (p ++ [nextCoord m s p])
+        findPath' m s e p =
+            let
+                next     = nextCoord m s p
+                next'    = sortBy (
+                                  \a b -> compare
+                                  (findPath' m a e p)
+                                  (findPath' m b e p)
+                         ) $ nextCoords m s p
+                nextChar = mapChar m next == mapChar m e
+                path     = p ++ [next]
+            in
+                if (s == e || mapChar m s == mapChar m e)
+                then p
+                else if (length next' > 0)
+                then p ++ next'
+                else if (nextCoord m s p == (-1, -1))
+                then []
+                else findPath' m next e path
 
 -- Find a path from the start coords to the end coords
 findPathDown :: Map -> Coord -> Coord -> Path
 findPathDown m s e = findPathDown' m s e [s]
     where
-        findPathDown' m s e p
-            | s == e = p
-            | nextCoordDown m s p == (-1, -1) = p
-            | (mapChar m s == mapChar m e) = p
-            | otherwise = findPathDown' m (nextCoordDown m s p) e (p ++ [nextCoordDown m s p])
+        findPathDown' m s e p =
+            let
+                next  = nextCoordDown m s p
+                next' = nextCoordDown m next p
+                path  = p ++ [next] ++ [next']
+            in
+                if (s == e)
+                then p
+                else if (nextCoordDown m s p == (-1, -1))
+                then []
+                else if (mapChar m s == mapChar m e)
+                then p
+                else findPathDown' m next' e path
 
 -- Given a coordinate find the next coordinate in the path
 nextCoord :: Map -> Coord -> Path -> Coord
 nextCoord m (x,y) p
-    | not $ null candidates = head candidates
+    | not $ null candidates = head $ filter (\c -> distance m (x,y) c p >= 0) candidates
     | otherwise = (-1,-1)
     where
         candidates =
-                   sortBy (
-                       \a b -> compare
-                       (distance m (x,y) a p)
-                       (distance m (x,y) b p)
-                   )
-                   $
-                   [ c | c <- [(x,y+1),(x+1,y),(x-1,y),(x,y-1)], not $ visited c p, validCoord m c, distance m (x,y) c p >= 0 ]
+                   [ c | c <- [(x,y+1),(x+1,y),(x-1,y),(x,y-1)], not $ visited c p, validCoord m c ]
+
+-- Given a coordinate find the next coordinate in the path
+nextCoords :: Map -> Coord -> Path -> Path
+nextCoords m (x,y) p
+    | not $ null candidates = candidates
+    | otherwise = [(-1,-1)]
+    where
+        candidates =
+                   [ c | c <- [(x,y+1),(x+1,y),(x-1,y),(x,y-1)], not $ visited c p, validCoord m c ]
 
 -- Given a coordinate find the next coordinate in the path
 nextCoordDown :: Map -> Coord -> Path -> Coord
