@@ -253,7 +253,7 @@ program SandyCave
      tehSands = tehSands + 1
 
      if (crack%Y == 1) then
-        print *, "I fall ___ "
+        print *, "I fly ^^^ "
 
         exit FlooringFlooring
      end if
