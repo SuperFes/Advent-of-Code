@@ -338,7 +338,7 @@ fun main(args: Array<String>) {
     }
 
     if (solved) {
-        val frequency = coordX.toBigInteger() * BigInteger("4000000") + coordY.toBigInteger()
+        val frequency:Long = (coordX).toLong() * 4000000 + (coordY).toLong()
 
         println("Frequency: $frequency")
     }
