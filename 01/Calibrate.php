@@ -1,37 +1,21 @@
 #!/usr/bin/php -q
 <?php
-function Number2Number(string $Number): string {
-    $Reverse = strrev($Number);
+function Number2Number(string $Numbers, bool $NumberBowl = false): array
+{
+    $Reverse = strrev($Numbers);
 
-    if ($Number === 'one' || $Reverse === 'one') {
-        return '1';
-    }
-    else if ($Number === 'two' || $Reverse === 'two') {
-        return '2';
-    }
-    else if ($Number === 'three' || $Reverse === 'three') {
-        return '3';
-    }
-    else if ($Number === 'four' || $Reverse === 'four') {
-        return '4';
-    }
-    else if ($Number === 'five' || $Reverse === 'five') {
-        return '5';
-    }
-    else if ($Number === 'six' || $Reverse === 'six') {
-        return '6';
-    }
-    else if ($Number === 'seven' || $Reverse === 'seven') {
-        return '7';
-    }
-    else if ($Number === 'eight' || $Reverse === 'eight') {
-        return '8';
-    }
-    else if ($Number === 'nine' || $Reverse === 'nine') {
-        return '9';
+    $Left  = [];
+    $Right = [];
+
+    if ($NumberBowl) {
+        $Numbers = strtr($Numbers, ['one' => '1', 'two' => '2', 'three' => '3', 'four' => '4', 'five' => '5', 'six' => '6', 'seven' => '7', 'eight' => '8', 'nine' => '9']);
+        $Reverse = strtr($Reverse, ['enin' => '9', 'thgie' => '8', 'neves' => '7', 'xis' => '6', 'evif' => '5', 'ruof' => '4', 'eerht' => '3', 'owt' => '2', 'eno' => '1']);
     }
 
-    return $Number;
+    preg_match_all('/(\d)/', $Numbers, $Left);
+    preg_match_all('/(\d)/', $Reverse, $Right);
+
+    return [$Left[1], $Right[1]];
 }
 
 $File = 'Data/Data.txt';
@@ -44,30 +28,18 @@ $Thing = fopen($File, 'rb');
 while (!feof($Thing)) {
     $Line = trim(fgets($Thing));
 
-    $Left = 0;
+    $Left  = 0;
     $Right = 0;
 
     $Len = strlen($Line);
 
-    if ($Len === 0) continue;
-
-    for ($l = 0; $l < $Len; $l++) {
-        if (preg_match('/\d/', $Line[$l])) {
-            $Left = $Line[$l];
-
-            break;
-        }
+    if ($Len === 0) {
+        continue;
     }
 
-    for ($r = $Len - 1; $r >= 0; $r--) {
-        if (preg_match('/\d/', $Line[$r])) {
-            $Right = $Line[$r];
+    [$Left, $Right] = Number2Number($Line);
 
-            break;
-        }
-    }
-
-    $LeftNRight = (int)"{$Left}{$Right}";
+    $LeftNRight = (int)"{$Left[0]}{$Right[0]}";
 
     $Total1 += $LeftNRight;
 }
@@ -79,34 +51,21 @@ printf("Total 1: %u\n", $Total1);
 $Thing = fopen($File, 'rb');
 
 while (!feof($Thing)) {
-    $Line = trim(fgets($Thing));
+    $Line    = trim(fgets($Thing));
     $RevLine = strrev($Line);
 
-    $Left = 0;
+    $Left  = 0;
     $Right = 0;
 
     $Len = strlen($Line);
 
-    if ($Len === 0) continue;
-
-    $PartsLeft = [];
-    $PartsRight = [];
-
-    if (!preg_match_all('/(\d|one|two|three|four|five|six|seven|eight|nine)/', $Line, $PartsLeft)) {
-        printf("Error: %s\n", $Line);
-
-        die();
-    }
-    if (!preg_match_all('/(\d|eno|owt|eerht|ruof|evif|xis|neves|thgie|enin)/', $RevLine, $PartsRight)) {
-      printf("Error: %s\n", $Line);
-
-      die();
+    if ($Len === 0) {
+        continue;
     }
 
-    $Left = Number2Number($PartsLeft[1][0]);
-    $Right = Number2Number($PartsRight[1][0]);
+    [$Left, $Right] = Number2Number($Line, true);
 
-    $LeftNRight = (int)"{$Left}{$Right}";
+    $LeftNRight = (int)"{$Left[0]}{$Right[0]}";
 
     $Total2 += $LeftNRight;
 }
