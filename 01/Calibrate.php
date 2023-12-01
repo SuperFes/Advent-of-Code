@@ -42,26 +42,6 @@ while (!feof($Thing)) {
     $LeftNRight = (int)"{$Left[0]}{$Right[0]}";
 
     $Total1 += $LeftNRight;
-}
-
-fclose($Thing);
-
-printf("Total 1: %u\n", $Total1);
-
-$Thing = fopen($File, 'rb');
-
-while (!feof($Thing)) {
-    $Line    = trim(fgets($Thing));
-    $RevLine = strrev($Line);
-
-    $Left  = 0;
-    $Right = 0;
-
-    $Len = strlen($Line);
-
-    if ($Len === 0) {
-        continue;
-    }
 
     [$Left, $Right] = Number2Number($Line, true);
 
@@ -72,4 +52,5 @@ while (!feof($Thing)) {
 
 fclose($Thing);
 
+printf("Total 1: %u\n", $Total1);
 printf("Total 2: %u\n", $Total2);
