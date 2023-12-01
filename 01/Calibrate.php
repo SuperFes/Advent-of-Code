@@ -2,14 +2,17 @@
 <?php
 function Number2Number(string $Numbers, bool $NumberBowl = false): array
 {
+    static $Forward  = ['one' => '1', 'two' => '2', 'three' => '3', 'four' => '4', 'five' => '5', 'six' => '6', 'seven' => '7', 'eight' => '8', 'nine' => '9'];
+    static $Backward = ['enin' => '9', 'thgie' => '8', 'neves' => '7', 'xis' => '6', 'evif' => '5', 'ruof' => '4', 'eerht' => '3', 'owt' => '2', 'eno' => '1'];
+
     $Reverse = strrev($Numbers);
 
     $Left  = [];
     $Right = [];
 
     if ($NumberBowl) {
-        $Numbers = strtr($Numbers, ['one' => '1', 'two' => '2', 'three' => '3', 'four' => '4', 'five' => '5', 'six' => '6', 'seven' => '7', 'eight' => '8', 'nine' => '9']);
-        $Reverse = strtr($Reverse, ['enin' => '9', 'thgie' => '8', 'neves' => '7', 'xis' => '6', 'evif' => '5', 'ruof' => '4', 'eerht' => '3', 'owt' => '2', 'eno' => '1']);
+        $Numbers = strtr($Numbers, $Forward);
+        $Reverse = strtr($Reverse, $Backward);
     }
 
     preg_match_all('/(\d)/', $Numbers, $Left);
