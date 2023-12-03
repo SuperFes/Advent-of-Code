@@ -108,7 +108,7 @@ class Number
     final public function SymBoxen(array $Froms): bool
     {
         foreach ($Froms as $From) {
-            if ($From->Inside($this->box)) {
+            if ($this->SymBox($From)) {
                 return true;
             }
         }
