@@ -2,10 +2,10 @@
 <?php
 class Box
 {
-    public int $t;
-    public int $l;
-    public int $b;
-    public int $r;
+    protected int $t;
+    protected int $l;
+    protected int $b;
+    protected int $r;
 
     public function __construct(int $t, int $l, int $b, int $r)
     {
@@ -13,6 +13,14 @@ class Box
         $this->l = $l;
         $this->b = $b;
         $this->r = $r;
+    }
+
+    final public function In(int $x, int $y): bool
+    {
+        return $y <= $this->b
+               && $x <= $this->r
+               && $y >= $this->t
+               && $x >= $this->l;
     }
 }
 
@@ -33,10 +41,7 @@ class Symbol
 
     final public function Inside(Box $Root): bool
     {
-        return $this->y >= $Root->t
-               && $this->y <= $Root->b
-               && $this->x >= $Root->l
-               && $this->x <= $Root->r;
+        return $Root->In($this->x, $this->y);
     }
 
     final public function IsGear(): bool
@@ -77,6 +82,8 @@ class Number
     private int $val;
     private int $len;
 
+    private Box $box;
+
     public function __construct(int $X, int $Y, string $Value)
     {
         $this->x = $X;
@@ -84,6 +91,8 @@ class Number
 
         $this->val = (int)$Value;
         $this->len = strlen($Value);
+
+        $this->box = new Box($this->y - 1, $this->x - 1, $this->y + 1, $this->x + $this->len);
     }
 
     final public function Num(): int
@@ -93,17 +102,13 @@ class Number
 
     final public function SymBox(Symbol $From): bool
     {
-        $Box = new Box($this->y - 1, $this->x - 1, $this->y + 1, $this->x + $this->len);
-
-        return $From->Inside($Box);
+        return $From->Inside($this->box);
     }
 
     final public function SymBoxen(array $Froms): bool
     {
-        $Box = new Box($this->y - 1, $this->x - 1, $this->y + 1, $this->x + $this->len);
-
         foreach ($Froms as $From) {
-            if ($From->Inside($Box)) {
+            if ($From->Inside($this->box)) {
                 return true;
             }
         }
