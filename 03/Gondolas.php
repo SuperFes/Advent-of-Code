@@ -32,26 +32,20 @@ class Symbol
         $this->char = $Value;
     }
 
-    function Inside(Box $Root): bool
+    final public function Inside(Box $Root): bool
     {
-        if (
-            $this->y >= $Root->t
-            && $this->y <= $Root->b
-            && $this->x >= $Root->l
-            && $this->x <= $Root->r
-        ) {
-            return true;
-        }
-
-        return false;
+        return $this->y >= $Root->t
+               && $this->y <= $Root->b
+               && $this->x >= $Root->l
+               && $this->x <= $Root->r;
     }
 
-    function IsGear(): bool
+    final public function IsGear(): bool
     {
         return $this->char === '*';
     }
 
-    function FindProduct(array $Numbois): int
+    final public function FindProduct(array $Numbois): int
     {
         $Ratios = [];
 
@@ -93,19 +87,19 @@ class Number
         $this->len = strlen($Value);
     }
 
-    public function Num(): int
+    final public function Num(): int
     {
         return $this->val;
     }
 
-    public function SymBox(Symbol &$From): bool
+    final public function SymBox(Symbol $From): bool
     {
         $Box = new Box($this->y - 1, $this->x - 1, $this->y + 1, $this->x + $this->len);
 
         return $From->Inside($Box);
     }
 
-    public function SymBoxen(array &$Froms): bool
+    final public function SymBoxen(array $Froms): bool
     {
         $Box = new Box($this->y - 1, $this->x - 1, $this->y + 1, $this->x + $this->len);
 
