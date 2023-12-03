@@ -1,6 +1,5 @@
 #!/usr/bin/env php
 <?php
-
 class Box
 {
     public int $t;
