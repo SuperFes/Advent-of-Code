@@ -27,7 +27,7 @@ while (!feof($Thing)) {
     sort($LeftNos[1]);
     sort($RightNos[1]);
 
-    $Intersection = array_intersect($LeftNos[1],$RightNos[1]);
+    $Intersection = array_intersect($LeftNos[1], $RightNos[1]);
 
     $Sections = count($Intersection);
 
