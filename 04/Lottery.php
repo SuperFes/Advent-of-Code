@@ -35,12 +35,12 @@ while (!feof($Thing)) {
         $Copies[$Row] = 1;
     }
 
-    for ($c = 0; $c < $Copies[$Row]; $c++) {
-        for ($r = $Row + 1; $r < $Row + 1 + $Sections; $r++) {
-            if (!isset($Copies[$r])) {
-                $Copies[$r] = 1;
-            }
+    for ($r = $Row + 1; $r < $Row + 1 + $Sections; $r++) {
+        if (!isset($Copies[$r])) {
+            $Copies[$r] = 1;
+        }
 
+        for ($c = 0; $c < $Copies[$Row]; $c++) {
             $Copies[$r]++;
         }
     }
