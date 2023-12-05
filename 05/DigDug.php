@@ -49,7 +49,7 @@ while (!feof($Thing)) {
 
 fclose($Thing);
 
-function FindLowMap(int $Seed, Maps $Maps) {
+function FindLowMap(int $Seed, Maps $Maps): int {
     $Soil = $Maps['seed-to-soil']->get($Seed);
     $Fertilizer = $Maps['soil-to-fertilizer']->get($Soil);
     $Water = $Maps['fertilizer-to-water']->get($Fertilizer);
