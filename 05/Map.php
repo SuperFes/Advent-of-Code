@@ -1,0 +1,111 @@
+<?php
+
+namespace Almanac;
+
+use ArrayAccess;
+use Countable;
+
+class Map
+{
+    private array $Dest = [];
+    private array $Source = [];
+    private array $Length = [];
+
+    final public function exists(mixed $offset): bool
+    {
+        $OS = (int)$offset;
+
+        $Num = count($this->Dest);
+
+        for ($l = 0; $l < $Num; $l++) {
+            if ($OS >= $this->Source[$l] && $OS < $this->Source[$l] + $this->Length[$l]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    final public function get(mixed $offset): int
+    {
+        $OS = (int)$offset;
+
+        if ($this->exists($offset)) {
+            $Num = count($this->Dest);
+
+            for ($l = 0; $l < $Num; $l++) {
+                if ($OS >= $this->Source[$l] && $OS < $this->Source[$l] + $this->Length[$l]) {
+                    return $this->Dest[$l] + ($OS - $this->Source[$l]);
+                }
+            }
+        }
+
+        return $OS;
+    }
+
+    final public function add(string $Dest, string $Source, string $Length): void
+    {
+        $this->Dest[]   = (int)$Dest;
+        $this->Source[] = (int)$Source;
+        $this->Length[] = (int)$Length;
+    }
+
+    final public function offsetUnset(mixed $offset): void
+    {
+    }
+
+    final public function getRanges(int $Source, int $High): array
+    {
+        $Ranges = [];
+
+        $Num = count($this->Dest);
+
+        for ($l = 0; $l < $Num; $l++) {
+            if ($Source >= $this->Dest[$l] && $High < $this->Dest[$l] + $this->Length[$l]) {
+                $Ranges[] = [$this->Dest[$l], $this->Dest[$l] + $this->Length[$l]];
+            }
+        }
+
+        return $Ranges;
+    }
+}
+
+class Maps implements ArrayAccess, Countable
+{
+    static private array $_maps = [];
+
+    final public function offsetExists(mixed $offset): bool
+    {
+        return isset(self::$_maps[$offset]);
+    }
+
+    final public function offsetGet(mixed $offset): ?Map
+    {
+        return self::$_maps[$offset] ?? null;
+    }
+
+    final public function offsetSet(mixed $offset, mixed $value): void
+    {
+        if (is_a($value, Map::class)) {
+            self::$_maps[$offset] = $value;
+
+            return;
+        }
+
+        [$Dest, $Source, $Length] = explode(' ', $value);
+
+        self::$_maps[$offset]->add($Dest, $Source, $Length);
+    }
+
+    final public function offsetUnset(mixed $offset): void
+    {
+        unset(self::$_maps[$offset]);
+    }
+
+    final public function count(): int
+    {
+        return count(self::$_maps);
+    }
+
+
+}
