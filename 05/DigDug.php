@@ -11,7 +11,7 @@ $Thing = fopen('Data/Data.txt', 'rb+');
 
 $CurMap = false;
 
-$Seeds = [];
+$Seeds     = [];
 $SeedPairs = [];
 
 while (!feof($Thing)) {
@@ -67,7 +67,7 @@ function FindLowMap(int $Seed, Maps $Maps): int {
     );
 }
 
-$Lowest = false;
+$Lowest   = false;
 $Lowester = false;
 
 foreach ($Seeds as $Seed) {
@@ -111,7 +111,7 @@ foreach ($SeedPairs as $SeedRange) {
 
         if ($Lowester === false || $Lowester > $Res) {
             $Lowester = $Res;
-            $LowSeed = $Seed;
+            $LowSeed  = $Seed;
         }
 
         $Step = ceil(($Range - $Seed) / 50);
@@ -125,7 +125,7 @@ foreach ($SeedPairs as $SeedRange) {
                 }
 
                 $Lowester = $Res;
-                $LowSeed = $Seed;
+                $LowSeed  = $Seed;
                 $HighSeed = $e;
             }
         }
