@@ -125,6 +125,4 @@ class Maps implements ArrayAccess, Countable
     {
         return count(self::$_maps);
     }
-
-
 }
