@@ -54,8 +54,8 @@ function FindLowMap(int $Seed, Maps $Maps): int {
     $Fertilizer = $Maps['soil-to-fertilizer']->get($Soil);
     $Water = $Maps['fertilizer-to-water']->get($Fertilizer);
     $Light = $Maps['water-to-light']->get($Water);
-    $Tempurature = $Maps['light-to-temperature']->get($Light);
-    $Humidity = $Maps['temperature-to-humidity']->get($Tempurature);
+    $Temperature = $Maps['light-to-temperature']->get($Light);
+    $Humidity = $Maps['temperature-to-humidity']->get($Temperature);
     return $Maps['humidity-to-location']->get($Humidity);
 }
 
@@ -75,8 +75,8 @@ $HighSeed = 0;
 
 $LowLocation    = $Maps['humidity-to-location']->getLowest();
 $LowHumidity    = $Maps['temperature-to-humidity']->getRanges([$LowLocation]);
-$LowTempurature = $Maps['light-to-temperature']->getRanges($LowHumidity);
-$LowLight       = $Maps['water-to-light']->getRanges($LowTempurature);
+$LowTemperature = $Maps['light-to-temperature']->getRanges($LowHumidity);
+$LowLight       = $Maps['water-to-light']->getRanges($LowTemperature);
 $LowWater       = $Maps['fertilizer-to-water']->getRanges($LowLight);
 $LowFertilizer  = $Maps['soil-to-fertilizer']->getRanges($LowWater);
 $LowSoil        = $Maps['seed-to-soil']->getRanges($LowFertilizer);
