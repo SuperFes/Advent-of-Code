@@ -73,31 +73,63 @@ foreach ($Seeds as $Seed) {
 $LowSeed  = 0;
 $HighSeed = 0;
 
+$LowLocation    = $Maps['humidity-to-location']->getLowest();
+$LowHumidity    = $Maps['temperature-to-humidity']->getRanges([$LowLocation]);
+$LowTempurature = $Maps['light-to-temperature']->getRanges($LowHumidity);
+$LowLight       = $Maps['water-to-light']->getRanges($LowTempurature);
+$LowWater       = $Maps['fertilizer-to-water']->getRanges($LowLight);
+$LowFertilizer  = $Maps['soil-to-fertilizer']->getRanges($LowWater);
+$LowSoil        = $Maps['seed-to-soil']->getRanges($LowFertilizer);
+
 foreach ($SeedPairs as $SeedRange) {
     [$Seed, $Range] = $SeedRange;
 
-    for ($e = $Seed; $e < $Range; $e += 25000) {
-        $Res = FindLowMap($e, $Maps);
+    foreach ($LowSoil as $SoilRange) {
+        [$BottomSoil, $TopSoil] = $SoilRange;
+
+        $InRange = max($Seed, $BottomSoil) <= min($Range, $TopSoil);
+
+        if (!$InRange) {
+            continue;
+        }
+
+        $Res = FindLowMap($Seed, $Maps);
 
         if ($Lowester === false || $Lowester > $Res) {
             $Lowester = $Res;
             $LowSeed = $Seed;
-            $HighSeed = $e;
+        }
+
+        $Step = ceil(($Range - $Seed) / 50);
+
+        for ($e = $Seed; $e < $Range; $e += $Step) {
+            $Res = FindLowMap($e, $Maps);
+
+            if ($Lowester === false || $Lowester > $Res) {
+                if ($Step > 2) {
+                    $Step = ceil($Step / 2);
+                }
+
+                $Lowester = $Res;
+                $LowSeed = $Seed;
+                $HighSeed = $e;
+            }
         }
     }
 }
 
-for ($e = $HighSeed; $e >= $LowSeed; $e -= 2500) {
+for ($e = $HighSeed; $e >= $LowSeed; $e -= 500) {
     $Res = FindLowMap($e, $Maps);
 
-    if ($Lowester === false || $Lowester > $Res) {
+    if ($Lowester > $Res) {
         $Lowester = $Res;
     }
 
-    $LowSeed = $e - 2500;
-
     if ($Res > $Lowester) {
-       break;
+        $LowSeed  = $e - 500;
+        $HighSeed = $e + 500;
+
+        break;
     }
 }
 
@@ -106,7 +138,6 @@ for ($e = $LowSeed; $e < $HighSeed; $e++) {
 
     if ($Lowester === false || $Lowester > $Res) {
         $Lowester = $Res;
-        $LowSeed = $e;
     }
 }
 

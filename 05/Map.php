@@ -54,15 +54,42 @@ class Map
     {
     }
 
-    final public function getRanges(int $Source, int $High): array
+    final public function getLowest(): array
     {
-        $Ranges = [];
+        $Lowest = false;
 
-        $Num = count($this->Dest);
+        $Num = count($this->Source);
 
         for ($l = 0; $l < $Num; $l++) {
-            if ($Source >= $this->Dest[$l] && $High < $this->Dest[$l] + $this->Length[$l]) {
-                $Ranges[] = [$this->Dest[$l], $this->Dest[$l] + $this->Length[$l]];
+            if ($Lowest === false || $this->Source[$l] < $this->Source[$Lowest]) {
+                $Lowest = $l;
+            }
+        }
+
+        return [$this->Source[$Lowest], $this->Source[$Lowest] + $this->Length[$Lowest]];
+    }
+
+    final public function getRanges(array $Sources): array
+    {
+        $Ranges = [];
+        $Added  = [];
+
+        $Num  = count($this->Source);
+        $NumM = count($Sources);
+
+        for ($l = 0; $l < $Num; $l++) {
+            for ($m = 0; $m < $NumM; $m++) {
+                [$Low, $High] = $Sources[$m];
+
+                $Source = $this->Source[$l];
+                $Dest   = $this->Dest[$l];
+                $Length = $this->Length[$l];
+                $Top    = $this->Dest[$l] + $Length;
+
+                if (!isset($Added[$Source]) && (max($Low, $Dest) <= min($High, $Top))) {
+                    $Added[$Source] = true;
+                    $Ranges[]       = [$Source, $Source + $Length];
+                }
             }
         }
 
