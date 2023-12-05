@@ -50,23 +50,17 @@ class Map
         $this->Length[] = (int)$Length;
     }
 
-    final public function offsetUnset(mixed $offset): void
-    {
-    }
-
     final public function getLowest(): array
     {
         $Lowest = false;
 
-        $Num = count($this->Source);
-
-        for ($l = 0; $l < $Num; $l++) {
-            if ($Lowest === false || $this->Source[$l] < $this->Source[$Lowest]) {
+        foreach ($this->Source as $l => $lValue) {
+            if ($Lowest === false || $lValue < $this->Source[$Lowest]) {
                 $Lowest = $l;
             }
         }
 
-        return [$this->Source[$Lowest], $this->Source[$Lowest] + $this->Length[$Lowest]];
+        return [[$this->Source[$Lowest], $this->Source[$Lowest] + $this->Length[$Lowest]]];
     }
 
     final public function getRanges(array $Sources): array
@@ -75,11 +69,10 @@ class Map
         $Added  = [];
 
         $Num  = count($this->Source);
-        $NumM = count($Sources);
 
         for ($l = 0; $l < $Num; $l++) {
-            for ($m = 0; $m < $NumM; $m++) {
-                [$Low, $High] = $Sources[$m];
+            foreach ($Sources as $mValue) {
+                [$Low, $High] = $mValue;
 
                 $Source = $this->Source[$l];
                 $Dest   = $this->Dest[$l];

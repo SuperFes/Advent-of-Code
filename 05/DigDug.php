@@ -50,13 +50,21 @@ while (!feof($Thing)) {
 fclose($Thing);
 
 function FindLowMap(int $Seed, Maps $Maps): int {
-    $Soil = $Maps['seed-to-soil']->get($Seed);
-    $Fertilizer = $Maps['soil-to-fertilizer']->get($Soil);
-    $Water = $Maps['fertilizer-to-water']->get($Fertilizer);
-    $Light = $Maps['water-to-light']->get($Water);
-    $Temperature = $Maps['light-to-temperature']->get($Light);
-    $Humidity = $Maps['temperature-to-humidity']->get($Temperature);
-    return $Maps['humidity-to-location']->get($Humidity);
+    return $Maps['humidity-to-location']->get(
+       $Maps['temperature-to-humidity']->get(
+          $Maps['light-to-temperature']->get(
+             $Maps['water-to-light']->get(
+                $Maps['fertilizer-to-water']->get(
+                   $Maps['soil-to-fertilizer']->get(
+                      $Maps['seed-to-soil']->get(
+                         $Seed
+                      )
+                   )
+                )
+             )
+          )
+       )
+    );
 }
 
 $Lowest = false;
@@ -73,13 +81,19 @@ foreach ($Seeds as $Seed) {
 $LowSeed  = 0;
 $HighSeed = 0;
 
-$LowLocation    = $Maps['humidity-to-location']->getLowest();
-$LowHumidity    = $Maps['temperature-to-humidity']->getRanges([$LowLocation]);
-$LowTemperature = $Maps['light-to-temperature']->getRanges($LowHumidity);
-$LowLight       = $Maps['water-to-light']->getRanges($LowTemperature);
-$LowWater       = $Maps['fertilizer-to-water']->getRanges($LowLight);
-$LowFertilizer  = $Maps['soil-to-fertilizer']->getRanges($LowWater);
-$LowSoil        = $Maps['seed-to-soil']->getRanges($LowFertilizer);
+$LowSoil = $Maps['seed-to-soil']->getRanges(
+   $Maps['soil-to-fertilizer']->getRanges(
+      $Maps['fertilizer-to-water']->getRanges(
+         $Maps['water-to-light']->getRanges(
+            $Maps['light-to-temperature']->getRanges(
+               $Maps['temperature-to-humidity']->getRanges(
+                  $Maps['humidity-to-location']->getLowest()
+               )
+            )
+         )
+      )
+   )
+);
 
 foreach ($SeedPairs as $SeedRange) {
     [$Seed, $Range] = $SeedRange;
