@@ -1,4 +1,5 @@
 <?php
+
 class Boat
 {
     private int $max;
@@ -8,12 +9,9 @@ class Boat
         $this->max = $max;
     }
 
-    final public function findWins(int $record, bool $bigSteps = false): int {
-        $bottomFound = false;
-        $topFound    = false;
-
+    final public function findWins(int $record, bool $bigSteps = false): int
+    {
         $upBottom = 0;
-        $downTop  = 0;
 
         $bottom = 0;
         $top    = 0;
@@ -32,33 +30,19 @@ class Boat
             }
         }
 
-        for ($i = $this->max; $i >= 0; $i -= $steps) {
-            if ($i * ($this->max - $i) > $record) {
-                $downTop = $i;
-
-                break;
-            }
-        }
-
         if ($bigSteps) {
             for ($i = $upBottom; $i >= 0; $i--) {
                 if ($i * ($this->max - $i) < $record) {
                     $bottom = $i + 1;
 
-                    break;
-                }
-            }
-
-            for ($i = $downTop; $i <= $this->max; $i++) {
-                if ($i * ($this->max - $i) < $record) {
-                    $top = $i;
+                    $top = $this->max - $i;
 
                     break;
                 }
             }
         }
         else {
-            $top    = $downTop;
+            $top    = $this->max - $upBottom;
             $bottom = $upBottom - 1;
         }
 
