@@ -11,8 +11,6 @@ class Boat
 
     final public function findWins(int $record, bool $bigSteps = false): int
     {
-        $upBottom = 0;
-
         $bottom = 0;
         $top    = 0;
 
@@ -24,14 +22,14 @@ class Boat
 
         for ($i = 0; $i <= $this->max; $i += $steps) {
             if ($i * ($this->max - $i) > $record) {
-                $upBottom = $i;
+                $bottom = $i;
 
                 break;
             }
         }
 
         if ($bigSteps) {
-            for ($i = $upBottom; $i >= 0; $i--) {
+            for ($i = $bottom; $i >= 0; $i--) {
                 if ($i * ($this->max - $i) < $record) {
                     $bottom = $i + 1;
 
@@ -42,8 +40,7 @@ class Boat
             }
         }
         else {
-            $top    = $this->max - $upBottom;
-            $bottom = $upBottom - 1;
+            $top = $this->max - $bottom + 1;
         }
 
         return $top - $bottom;
