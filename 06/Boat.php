@@ -18,7 +18,7 @@ class Boat
         $ceil  = ceil($this->max / 2);
 
         if ($bigSteps) {
-            $steps = ceil($ceil / 50);
+            $steps = ceil($ceil / 250);
         }
 
         for ($i = 0; $i <= $ceil; $i += $steps) {
