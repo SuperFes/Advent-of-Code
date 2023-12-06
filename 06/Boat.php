@@ -9,7 +9,8 @@ class Boat
         $this->max = $max;
     }
 
-    final public function findWins(int $record, bool $bigSteps = false): int
+    // 3900, determined by fair dice roll
+    final public function findWins(int $record, bool $bigSteps = false, int $ChunkSize = 3900): int
     {
         $bottom = 0;
         $top    = 0;
@@ -18,7 +19,7 @@ class Boat
         $ceil  = ceil($this->max / 2);
 
         if ($bigSteps) {
-            $steps = ceil($ceil / 250);
+            $steps = ceil($ceil / $ChunkSize);
         }
 
         for ($i = 0; $i <= $ceil; $i += $steps) {
