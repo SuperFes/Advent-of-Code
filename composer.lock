@@ -4,8 +4,62 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "893ef102bb03596a3df96c9acba09000",
+    "content-hash": "e79198d80aabfed8c4378d02e9e57020",
     "packages": [
+        {
+            "name": "ayesh/php-timer",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Ayesh/php-timer.git",
+                "reference": "82677af155eb3b7083ffcdad58c80a66fbbec8a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Ayesh/php-timer/zipball/82677af155eb3b7083ffcdad58c80a66fbbec8a1",
+                "reference": "82677af155eb3b7083ffcdad58c80a66fbbec8a1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0",
+                "symfony/phpunit-bridge": "^4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ayesh\\PHP_Timer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ayesh Karunaratne",
+                    "email": "ayesh@ayesh.me",
+                    "homepage": "https://ayesh.me",
+                    "role": "Author"
+                }
+            ],
+            "description": "High-resolution and monotonic stop-watch for all your needs. Supports timer start, pause, resume, stop, read, and minimal conversion.",
+            "homepage": "https://github.com/ayesh/php-timer",
+            "keywords": [
+                "benchmark",
+                "performance",
+                "stopwatch",
+                "time",
+                "timer"
+            ],
+            "support": {
+                "issues": "https://github.com/Ayesh/php-timer/issues",
+                "source": "https://github.com/Ayesh/php-timer"
+            },
+            "time": "2020-12-18T11:37:14+00:00"
+        },
         {
             "name": "clue/graph",
             "version": "v0.9.3",
@@ -124,65 +178,6 @@
                 "source": "https://github.com/graphp/algorithms/tree/v0.8.2"
             },
             "time": "2020-02-20T18:01:41+00:00"
-        },
-        {
-            "name": "phpunit/php-timer",
-            "version": "6.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/php-timer.git",
-                "reference": "e2a2d67966e740530f4a3343fe2e030ffdc1161d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/e2a2d67966e740530f4a3343fe2e030ffdc1161d",
-                "reference": "e2a2d67966e740530f4a3343fe2e030ffdc1161d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^10.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "6.0-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
-                }
-            ],
-            "description": "Utility class for timing",
-            "homepage": "https://github.com/sebastianbergmann/php-timer/",
-            "keywords": [
-                "timer"
-            ],
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/php-timer/issues",
-                "source": "https://github.com/sebastianbergmann/php-timer/tree/6.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2023-02-03T06:57:52+00:00"
         }
     ],
     "packages-dev": [],

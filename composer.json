@@ -1,6 +1,6 @@
 {
     "require": {
         "graphp/algorithms": "^0.8.2",
-        "phpunit/php-timer": "^6.0"
+        "ayesh/php-timer": "^2.2"
     }
 }
