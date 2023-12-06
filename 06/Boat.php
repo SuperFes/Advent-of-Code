@@ -9,8 +9,8 @@ class Boat
         $this->max = $max;
     }
 
-    // 3900, determined by fair dice roll
-    final public function findWins(int $record, bool $bigSteps = false, int $ChunkSize = 3900): int
+    // 328, determined by fair dice roll
+    final public function findWins(int $record, bool $bigSteps = false, int $ChunkSize = 328): int
     {
         $bottom = 0;
         $top    = 0;
