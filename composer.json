@@ -1,5 +1,6 @@
 {
     "require": {
-        "graphp/algorithms": "^0.8.2"
+        "graphp/algorithms": "^0.8.2",
+        "phpunit/php-timer": "^6.0"
     }
 }
