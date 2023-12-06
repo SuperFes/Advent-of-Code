@@ -62,6 +62,12 @@ class Map
         return [[$this->Source[$Lowest], $this->Source[$Lowest] + $this->Length[$Lowest]]];
     }
 
+    private function inRange($x1, $x2, $y1, $y2): bool {
+        // Check if any point of one pair overlaps with the other's range, including endpoints
+        return ($x1 >= $x2 && $x1 <= $y2) || ($y1 >= $x2 && $y1 <= $y2)
+               || ($x2 >= $x1 && $x2 <= $y1) || ($y2 >= $x1 && $y2 <= $y1);
+    }
+
     final public function getRanges(array $Sources): array
     {
         $Ranges = [];
@@ -78,7 +84,7 @@ class Map
                 $Length = $this->Length[$l];
                 $Top    = $this->Dest[$l] + $Length;
 
-                if (!isset($Added[$Source]) && (max($Low, $Dest) <= min($High, $Top))) {
+                if (!isset($Added[$Source]) && ($this->inRange($Low, $High, $Dest, $Top))) {
                     $Added[$Source] = true;
                     $Ranges[]       = [$Source, $Source + $Length];
                 }
