@@ -8,34 +8,60 @@ class Boat
         $this->max = $max;
     }
 
-    final public function findWins(int $record): int {
-        $canWin = 0;
+    final public function findWins(int $record, bool $bigSteps = false): int {
+        $bottomFound = false;
+        $topFound    = false;
 
-        $ms = $this->max;
+        $upBottom = 0;
+        $downTop  = 0;
 
         $bottom = 0;
         $top    = 0;
 
-        for ($i = 0; $i <= $this->max; $i++) {
-            if ($i * ($ms - $i) > $record) {
-                $canWin++;
+        $steps = 1;
 
-                $bottom = $i;
+        if ($bigSteps) {
+            $steps = ceil($this->max / 50);
+        }
+
+        for ($i = 0; $i <= $this->max; $i += $steps) {
+            if ($i * ($this->max - $i) > $record) {
+                $upBottom = $i;
 
                 break;
             }
         }
 
-        for ($i = $this->max; $i >= 0; $i--) {
-            if ($i * ($ms - $i) > $record) {
-                $top = $i;
+        for ($i = $this->max; $i >= 0; $i -= $steps) {
+            if ($i * ($this->max - $i) > $record) {
+                $downTop = $i;
 
                 break;
             }
         }
 
-        $canWin += $top - $bottom;
+        if ($bigSteps) {
+            for ($i = $upBottom; $i >= 0; $i--) {
+                if ($i * ($this->max - $i) < $record) {
+                    $bottom = $i + 1;
 
-        return $canWin;
+                    break;
+                }
+            }
+
+            for ($i = $downTop; $i <= $this->max; $i++) {
+                if ($i * ($this->max - $i) < $record) {
+                    $top = $i;
+
+                    break;
+                }
+            }
+        }
+        else {
+            $top    = $downTop;
+            $bottom = $upBottom - 1;
+        }
+
+        return $top - $bottom;
     }
 }
