@@ -15,12 +15,13 @@ class Boat
         $top    = 0;
 
         $steps = 1;
+        $ceil  = ceil($this->max / 2);
 
         if ($bigSteps) {
-            $steps = ceil($this->max / 50);
+            $steps = ceil($ceil / 50);
         }
 
-        for ($i = 0; $i <= $this->max; $i += $steps) {
+        for ($i = 0; $i <= $ceil; $i += $steps) {
             if ($i * ($this->max - $i) > $record) {
                 $bottom = $i;
 
