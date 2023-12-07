@@ -84,8 +84,9 @@ class Hands
 
         rsort($counts);
 
-        if (empty($counts)) {
-            $counts[] = 5;
+        // We don't count wilds as cards above, so if it's 5, that means we have 5 wilds.
+        if ($wilds === 5) {
+            $counts[] = $wilds;
         }
         else if ($wild) {
             $counts[0] += $wilds;
