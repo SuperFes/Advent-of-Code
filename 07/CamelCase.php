@@ -95,7 +95,7 @@ class Hands
         $handCount = implode('-', $counts);
 
         if (!isset(self::$HandValues[$handCount])) {
-            throw new \RuntimeException('Chance of this happening, is zero!');
+            throw new RuntimeException('Chance of this happening, is zero!');
         }
 
         $score = self::$HandValues[$handCount];
