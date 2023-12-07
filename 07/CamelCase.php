@@ -105,7 +105,7 @@ class Hands
         $score += $cards[$hand[3]] << 8;
         $score += $cards[$hand[4]];
 
-        self::$CalculatedCamels[$hand] = $score;
+        self::$CalculatedCamels[(int)$wild][$hand] = $score;
 
         return $score;
     }
