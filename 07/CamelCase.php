@@ -6,7 +6,7 @@ use Ayesh\PHP_Timer\Timer;
 
 Timer::start('App run time');
 
-class Hands
+class CamelCase
 {
     private static array $Chars = [
         'A' => 0xF,
@@ -168,7 +168,7 @@ Timer::stop('Load data');
 
 Timer::start('Run round 1');
 
-uksort($Hands, 'Hands::sortHands');
+uksort($Hands, 'CamelCase::sortHands');
 
 $Total1 = 0;
 
@@ -182,7 +182,7 @@ Timer::stop('Run round 1');
 
 Timer::start('Run round 2');
 
-uksort($Hands, 'Hands::wildSortHands');
+uksort($Hands, 'CamelCase::wildSortHands');
 
 $Total2 = 0;
 
