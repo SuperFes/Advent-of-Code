@@ -50,11 +50,11 @@ class Hands
         '1-1-1-1-1' => 0x0,
     ];
 
-    private static array $CalculatedCamels = [];
+    private static array $CalculatedCamels = [0 => [], 1 => []];
 
     private static function getHandValue(string $hand, bool $wild = false): int {
-        if (isset(self::$CalculatedCamels[$hand])) {
-           return self::$CalculatedCamels[$hand];
+        if (isset(self::$CalculatedCamels[(int)$wild][$hand])) {
+           return self::$CalculatedCamels[(int)$wild][$hand];
         }
 
         $cards = self::$Chars;
