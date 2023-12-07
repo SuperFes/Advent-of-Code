@@ -41,12 +41,12 @@ class Hands
     ];
 
     private static array $HandValues = [
-        '5'         => 0xF00000000,
-        '4-1'       => 0xA00000000,
-        '3-2'       => 0x800000000,
-        '3-1-1'     => 0x400000000,
-        '2-2-1'     => 0x200000000,
-        '2-1-1-1'   => 0x100000000,
+        '5'         => 0x2000000,
+        '4-1'       => 0x1000000,
+        '3-2'       => 0x800000,
+        '3-1-1'     => 0x400000,
+        '2-2-1'     => 0x200000,
+        '2-1-1-1'   => 0x100000,
         '1-1-1-1-1' => 0x0,
     ];
 
@@ -100,10 +100,10 @@ class Hands
 
         $score = self::$HandValues[$handCount];
 
-        $score += $cards[$hand[0]] << 24;
-        $score += $cards[$hand[1]] << 16;
-        $score += $cards[$hand[2]] << 12;
-        $score += $cards[$hand[3]] << 8;
+        $score += $cards[$hand[0]] << 16;
+        $score += $cards[$hand[1]] << 12;
+        $score += $cards[$hand[2]] << 8;
+        $score += $cards[$hand[3]] << 4;
         $score += $cards[$hand[4]];
 
         self::$CalculatedCamels[(int)$wild][$hand] = $score;
