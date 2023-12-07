@@ -6,8 +6,6 @@ use Ayesh\PHP_Timer\Timer;
 
 Timer::start('App run time');
 
-$RunTimes = [];
-
 require 'Boat.php';
 
 Timer::start('Load file');
