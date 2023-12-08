@@ -1,6 +1,9 @@
 {
-    "require": {
-        "graphp/algorithms": "^0.8.2",
-        "ayesh/php-timer": "^2.2"
-    }
+   "require": {
+      "clue/graph": "^0.9.3",
+      "graphp/algorithms": "^0.8.2",
+      "graphp/graphviz": "^0.2.2",
+      "ayesh/php-timer": "^2.2",
+      "ext-gmp": "*"
+   }
 }
