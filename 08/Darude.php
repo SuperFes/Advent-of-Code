@@ -87,10 +87,12 @@ class Darude
 
         $Names = array_keys(self::$_Vertices);
 
+        $count = strlen($directions);
+
         foreach ($Names as $Name) {
             if ($Name[2] === 'A') {
                 $currentVertices[] = $Name;
-                $currentVertex .= 'A';
+                $currentVertex     .= 'A';
             }
             else if ($Name[2] === 'Z') {
                 $endVertices[] = $Name;
@@ -100,8 +102,6 @@ class Darude
         }
 
         $numberVerts = count($currentVertices);
-
-        $count = strlen($directions);
 
         for (;; $steps++) {
             $step = $steps % $count;
@@ -144,6 +144,49 @@ class Darude
             }
             else {
                 $steps *= $currentMove;
+            }
+        }
+
+        return $steps * $count;
+    }
+
+    public static function runInstructionsGraph(string $directions): int
+    {
+        $steps = 0;
+
+        $currentVertices = [];
+        $endVertices     = [];
+
+        $Names = array_keys(self::$_Vertices);
+
+        $count = strlen($directions);
+
+        foreach ($Names as $Name) {
+            if ($Name[2] === 'A') {
+                $currentVertices[] = $Name;
+            }
+            else if ($Name[2] === 'Z') {
+                $endVertices[] = $Name;
+            }
+        }
+
+        foreach ($currentVertices as $start) {
+            $search = new BreadthFirst(self::$_Vertices[$start]['_v']);
+
+            foreach ($endVertices as $end) {
+                try {
+                    $distance = $search->getDistance(self::$_Vertices[$end]['_v']);
+
+                    if ($steps === 0) {
+                        $steps = $distance;
+                    }
+                    else {
+                        $steps *= $distance;
+                    }
+                }
+                catch (\Fhaculty\Graph\Exception\OutOfBoundsException $e) {
+                    continue;
+                }
             }
         }
 
@@ -212,8 +255,16 @@ $StepsMulti = Darude::runInstructionsMulti($Instructions);
 
 Timer::stop('Multi steps taken');
 
+
+Timer::start('Graph steps taken');
+
+$StepsGraph = Darude::runInstructionsGraph($Instructions);
+
+Timer::stop('Graph steps taken');
+
 print "Steps taken: $Steps\n";
-print "Multi steps taken: $StepsMulti\n\n";
+print "Multi steps taken: $StepsMulti\n";
+print "Graph steps taken: $StepsGraph\n\n";
 
 Timer::stop('App run time');
 
