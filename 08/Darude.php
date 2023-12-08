@@ -44,29 +44,24 @@ class Darude
         }
     }
 
-    private static function mod(int $k, int $n): int
-    {
-        return (($k %= $n) < 0) ? $k + $n : $k;
-    }
-
     public static function runInstructions(string $directions): int
     {
         $steps = 0;
 
-        $curerntVertex = 'AAA';
+        $currentVertex = 'AAA';
 
         $count = strlen($directions);
 
         for (; ; $steps++) {
             $step = $steps % $count;
 
-            if ($curerntVertex === 'ZZZ') {
+            if ($currentVertex === 'ZZZ') {
                 break;
             }
 
             $dir = $directions[$step];
 
-            $curerntVertex = self::$_Vertices[$curerntVertex][$dir];
+            $currentVertex = self::$_Vertices[$currentVertex][$dir];
         }
 
         return $steps;
@@ -77,10 +72,6 @@ class Darude
         $steps = 0;
 
         $currentVertices = [];
-        $endVertices     = [];
-
-        $currentVertex = '';
-        $endVertex     = '';
 
         $currentMoves = [];
         $calculate    = 0;
@@ -92,34 +83,24 @@ class Darude
         foreach ($Names as $Name) {
             if ($Name[2] === 'A') {
                 $currentVertices[] = $Name;
-                $currentVertex     .= 'A';
-            }
-            else if ($Name[2] === 'Z') {
-                $endVertices[] = $Name;
-
-                $endVertex .= 'Z';
             }
         }
-
-        $numberVerts = count($currentVertices);
 
         for (;; $steps++) {
             $step = $steps % $count;
 
-            if ($currentVertex === $endVertex) {
-                break;
-            }
-
             $dir = $directions[$step];
+
+            $numberVertices = count($currentVertices);
 
             $currentVertex = '';
 
-            for ($i = 0; $i < $numberVerts; $i++) {
-                if ($currentVertices[$i][2] === 'Z') {
+            foreach ($currentVertices as $i => $iValue) {
+                if ($iValue[2] === 'Z') {
                     continue;
                 }
 
-                $currentVertices[$i] = self::$_Vertices[$currentVertices[$i]][$dir];
+                $currentVertices[$i] = self::$_Vertices[$iValue][$dir];
 
                 $currentVertex .= $currentVertices[$i][2];
 
@@ -130,7 +111,7 @@ class Darude
                 }
             }
 
-            if ($calculate === $numberVerts) {
+            if ($calculate === $numberVertices) {
                 // Time for math!
                 break;
             }
@@ -183,8 +164,12 @@ class Darude
                     else {
                         $steps *= $distance;
                     }
+
+                    unset($endVertices[$end]);
+
+                    break;
                 }
-                catch (\Fhaculty\Graph\Exception\OutOfBoundsException $e) {
+                catch (\Fhaculty\Graph\Exception\OutOfBoundsException) {
                     continue;
                 }
             }
@@ -200,11 +185,8 @@ class Darude
         }
     }
 
-    public static function __callStatic(string $name, array $arguments): mixed
+    public static function __callStatic(string $name, array $arguments): int
     {
-        static $_graph = false;
-
-
         if ($name === 'trueLove') {
             print self::$Blave . "\n\n";
         }
@@ -254,7 +236,6 @@ Timer::start('Multi steps taken');
 $StepsMulti = Darude::runInstructionsMulti($Instructions);
 
 Timer::stop('Multi steps taken');
-
 
 Timer::start('Graph steps taken');
 
