@@ -42,10 +42,14 @@ while (!feof($Thing)) {
     foreach ($Hashes as $Hash) {
         $Deers += ReindeerHash($Hash);
 
-        $Label = substr($Hash, 0, 2);
+        $Matches = [];
+
+        preg_match('/(?<Label>[a-z]+)(?<Op>-|=)(?<Lens>\d+)?/', $Hash, $Matches);
+
+        $Label = $Matches['Label'];
         $Box   = ReindeerHash($Label);
-        $Op    = $Hash[2];
-        $Lens  = $Hash[3] ?? null;
+        $Op    = $Matches['Op'];
+        $Lens  = $Matches['Lens'] ?? null;
 
         if (!isset($Boxen[$Box])) {
             $Boxen[$Box] = [];
