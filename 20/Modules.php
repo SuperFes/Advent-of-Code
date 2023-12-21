@@ -159,7 +159,7 @@ class Conjunction extends Module
                 $Intervals = $this->Intervals[$From];
             }
 
-            if (count($Intervals) < 20) {
+            if (count($Intervals) < 2) {
                 $Intervals[] = self::$Presses;
 
                 $this->Intervals[$From] = $Intervals;
