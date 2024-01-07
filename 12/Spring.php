@@ -387,7 +387,7 @@ class Spring
     {
         $Wiggles = 0;
 
-        $States     = ['0:0:0:0=1' => [[0, 0, 0, 0], 1]];
+        $States = ['0:0:0:0' => [[0, 0, 0, 0], 1]];
 
         $MaskEnd    = strlen($this->BigMask);
         $NumSprings = count($this->BigSprings);
@@ -451,7 +451,7 @@ class Spring
                 }
             }
 
-            $States     = $NextStates;
+            $States = $NextStates;
         }
 
         unset($States, $NextStates);
