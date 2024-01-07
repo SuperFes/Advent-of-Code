@@ -408,7 +408,7 @@ class Spring
 
                 if ($ExpDot === 0 && ($this->BigMask[$MaskIndex] === '#' || $this->BigMask[$MaskIndex] === '?') && $SpringIndex < $NumSprings) {
                     if ($this->BigMask[$MaskIndex] === '?' && $SpringLength === 0) {
-                        $Index = $this->CreateIndex($MaskIndex + 1, $SpringIndex, $SpringLength, $ExpDot, $Num);
+                        $Index = $this->CreateIndex($MaskIndex + 1, $SpringIndex, $SpringLength, $ExpDot);
 
                         if (isset($NextStates[$Index])) {
                             $NextStates[$Index][1] += $Num;
@@ -428,7 +428,7 @@ class Spring
                         $ExpDot = 1;
                     }
 
-                    $Index = $this->CreateIndex($MaskIndex + 1, $SpringIndex, $SpringLength, $ExpDot, $Num);
+                    $Index = $this->CreateIndex($MaskIndex + 1, $SpringIndex, $SpringLength, $ExpDot);
 
                     if (isset($NextStates[$Index])) {
                         $NextStates[$Index][1] += $Num;
@@ -440,7 +440,7 @@ class Spring
                 else if ($SpringLength === 0 && ($this->BigMask[$MaskIndex] === '.' || $this->BigMask[$MaskIndex] === '?')) {
                     $ExpDot = 0;
 
-                    $Index = $this->CreateIndex($MaskIndex + 1, $SpringIndex, $SpringLength, $ExpDot, $Num);
+                    $Index = $this->CreateIndex($MaskIndex + 1, $SpringIndex, $SpringLength, $ExpDot);
 
                     if (isset($NextStates[$Index])) {
                         $NextStates[$Index][1] += $Num;
@@ -459,8 +459,8 @@ class Spring
         return $Wiggles;
     }
 
-    private function CreateIndex(mixed $MaskIndex, mixed $SpringIndex, int $SpringLength, int $ExpDot, mixed $Num): string
+    private function CreateIndex(mixed $MaskIndex, mixed $SpringIndex, int $SpringLength, int $ExpDot): string
     {
-        return "{$MaskIndex}:{$SpringIndex}:{$SpringLength}:{$ExpDot}={$Num}";
+        return "{$MaskIndex}:{$SpringIndex}:{$SpringLength}:{$ExpDot}";
     }
 }

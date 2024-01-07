@@ -54,7 +54,7 @@ while (!empty($Springs)) {
 Timer::stop('Big wiggles');
 
 print "Total wiggles: {$Wiggles}\n";
-print "Total big wiggles: {$BWiggles}\n";
+print "Total big wiggles: {$BWiggles}\n\n";
 
 Timer::stop('Application runtime');
 
