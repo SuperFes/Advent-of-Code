@@ -1,5 +1,4 @@
 <?php
-
 class Point
 {
     public int $X;
@@ -14,7 +13,7 @@ class Point
 
 class Garden
 {
-    private static array   $_OrigMap;
+    private static array $_OrigMap;
 
     private static int   $_Width  = 0;
     private static int   $_Height = 0;
@@ -161,9 +160,7 @@ class Garden
                 if (count($Counter) === 3) {
                     $NumSteps = (int)floor($Depth / self::$_Height);
 
-                    $NextNum = self::CalculateInterval($Counter, $NumSteps);
-
-                    return $NextNum;
+                    return self::CalculateInterval($Counter, $NumSteps);
                 }
             }
         }
@@ -309,5 +306,77 @@ class Garden
         }
 
         return end($History[0]);
+    }
+
+    public static function CountAtStep(int $Step): int
+    {
+        if (self::$Started === null) {
+            for ($Y = 0; $Y < self::$_Height; $Y++) {
+                for ($X = 01; $X < self::$_Width; $X++) {
+                    $Point = self::GetPoint($X, $Y);
+
+                    if (self::$Started === null && $Point === 'S') {
+                        self::$Started = new Point($X, $Y);
+
+                        break;
+                    }
+                }
+
+                if (self::$Started !== null) {
+                    break;
+                }
+            }
+
+            self::SetPoint(self::$Started->X, self::$Started->Y, '.');
+
+            self::$_OrigMap = self::$MapGrid['0x0']['Map'];
+
+            self::SetPoint(self::$Started->X, self::$Started->Y, 'S');
+        }
+
+        $Count = 0;
+
+        $Quad = 0;
+
+        $Size = (int)floor(self::$_Width / 2);
+
+        for ($X = -$Step; $X <= $Step; $X++) {
+            for ($Y = -$Quad; $Y <= $Quad; $Y += 2) {
+                if (self::CheckMap($Size + $X, $Size + $Y)) {
+                    $Count++;
+                }
+            }
+
+            if ($X < 0) {
+                $Quad++;
+            }
+            else {
+                $Quad--;
+            }
+        }
+
+        return $Count;
+    }
+
+    private static function CheckMap(int $X, int $Y): bool
+    {
+        static $Map = [];
+
+        if (empty($Map)) {
+            $Map = self::$_OrigMap;
+
+            for ($iY = 1; $iY < self::$_Height - 2; $iY++) {
+                for ($iX = 1; $iX < self::$_Width - 2; $iX++) {
+                    if ($Map[$iX][$iX - 1] === '#' && $Map[$iY][$iX + 1] === '#' && $Map[$iY - 1][$iX] === '#' && $Map[$iY + 1][$iX] === '#') {
+                        $Map[$iY][$iX] = '#';
+                    }
+                }
+            }
+        }
+
+        $X = self::Mod($X, self::$_Width);
+        $Y = self::Mod($Y, self::$_Height);
+
+        return $Map[$Y][$X] !== '#';
     }
 }

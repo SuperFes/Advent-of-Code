@@ -1,5 +1,4 @@
 <?php
-
 class MinPathHeap extends SplHeap
 {
     final public function compare($value1, $value2): int
@@ -63,14 +62,12 @@ class Convection
 
         $Start = "0x0";
 
-        $Cost = 0;
-
         $CheapestPath = PHP_INT_MAX;
 
         $Paths = new MinPathHeap();
 
-        $Paths->insert([$Start => ['x' => 0, 'y' => 0, 'c' => $Cost, 'r' => 0, 'd' => 1, 'm' => 0]]);
-        $Paths->insert([$Start => ['x' => 0, 'y' => 0, 'c' => $Cost, 'r' => 0, 'd' => 2, 'm' => 0]]);
+        $Paths->insert([$Start => ['x' => 0, 'y' => 0, 'c' => 0, 'r' => 0, 'd' => 1, 'm' => 0]]);
+        $Paths->insert([$Start => ['x' => 0, 'y' => 0, 'c' => 0, 'r' => 0, 'd' => 2, 'm' => 0]]);
 
         while (!$Paths->isEmpty()) {
             $Path = $Paths->extract();

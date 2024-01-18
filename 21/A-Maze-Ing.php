@@ -31,7 +31,7 @@ try {
     $ShortWalk = Garden::SeekAndDestroy(64);
 }
 catch (Exception $e) {
-   print "Exception =( " . $e->getMessage() . ")=\n";
+    print "Exception =( " . $e->getMessage() . ")=\n";
 }
 
 Timer::stop('XOR');

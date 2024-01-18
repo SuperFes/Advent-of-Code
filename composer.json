@@ -4,6 +4,11 @@
       "graphp/algorithms": "^0.8.2",
       "graphp/graphviz": "^0.2.2",
       "ayesh/php-timer": "^2.2",
-      "ext-gmp": "*"
+      "ext-gmp": "*",
+      "jmgq/a-star": "^2.1",
+      "ext-gd": "*",
+      "mjaschen/phpgeo": "^5.0",
+      "phayes/geophp": "^1.2",
+      "markrogoyski/math-php": "^2.8"
    }
 }

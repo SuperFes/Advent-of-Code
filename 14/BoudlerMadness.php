@@ -144,7 +144,6 @@ for ($Spin = 0; $Spin < 1000000000; $Spin++) {
         $Stuffers--;
     }
 
-
     if ($CycleFound === 0) {
         $Spins[] = $SpinWeight;
 
