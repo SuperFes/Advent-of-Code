@@ -9,6 +9,7 @@
       "ext-gd": "*",
       "mjaschen/phpgeo": "^5.0",
       "phayes/geophp": "^1.2",
-      "markrogoyski/math-php": "^2.8"
+      "markrogoyski/math-php": "^2.8",
+      "dariuszp/cli-progress-bar": "^1.0"
    }
 }
