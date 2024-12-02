@@ -1,0 +1,9 @@
+**/Data
+**/vendor
+**/node_modules
+debug/
+target/
+Cargo.lock
+**/*.rs.bk
+**/*.pdb
+.idea/
