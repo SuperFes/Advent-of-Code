@@ -30,15 +30,15 @@ export default function part2(lines = []) {
 
     const Length = Left.length;
 
-    let Distance = 0;
+    let Similarity = 0;
 
     for (let i = 0; i < Length; i++) {
         if (Sims[Left[i]] !== undefined) {
-            Distance += Left[i] * Sims[Left[i]];
+            Similarity += Left[i] * Sims[Left[i]];
         }
     }
 
-    console.log(`The similarity score is: ${Distance}`);
+    console.log(`The similarity score is: ${Similarity}`);
 
     return true;
 }
