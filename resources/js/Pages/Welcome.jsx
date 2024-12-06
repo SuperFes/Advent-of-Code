@@ -11,8 +11,8 @@ import {StarBorderOutlined, StarHalf, StarHalfTwoTone, StarOutlined, StarSharp} 
 
 const Days = [
     {label: '01', content: React.lazy(() => import("@/Days/01/Problem.jsx")), enabled: true, stars: 2},
-    {label: '02', content: React.lazy(() => import("@/Days/02/Problem.jsx")), enabled: false, stars: 0},
-    {label: '03', content: React.lazy(() => import("@/Days/03/Problem.jsx")), enabled: false, stars: 0},
+    {label: '02', content: React.lazy(() => import("@/Days/02/Problem.jsx")), enabled: false, stars: 2},
+    {label: '03', content: React.lazy(() => import("@/Days/03/Problem.jsx")), enabled: false, stars: 3},
     {label: '04', content: React.lazy(() => import("@/Days/04/Problem.jsx")), enabled: false, stars: 0},
     {label: '05', content: React.lazy(() => import("@/Days/05/Problem.jsx")), enabled: false, stars: 0},
     {label: '06', content: React.lazy(() => import("@/Days/06/Problem.jsx")), enabled: false, stars: 0},
