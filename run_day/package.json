@@ -1,0 +1,17 @@
+{
+    "name": "run_day",
+    "version": "1.0.0",
+    "main": "index.js",
+    "bin": {
+        "run_day": "./index.js",
+    },
+    "scripts": {},
+    "type": "module",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "commander": "^12.1.0"
+    }
+}
