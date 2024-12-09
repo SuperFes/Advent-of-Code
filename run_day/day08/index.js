@@ -8,7 +8,6 @@ console.time('Execution time');
 
 const program = new Command();
 
-let data = [];
 let file = './Data/Test.txt';
 
 let runParts = [part1, part2];
@@ -33,24 +32,32 @@ fs.readFile(file, 'utf8', (err, fileData) => {
         return;
     }
 
-    data = fileData.split(/\n/i);
+    let lines = fileData.split(/\n/i);
 
-    let Map = new Array(data.length - 1);
+    let map = {
+        bounds: {
+            width: lines[0].length,
+            height: lines.length - 1,
+        },
+        antennae: [],
+        antinodes: [],
+    };
 
-    let y = 0;
 
-    for (const line of data) {
-        if (line.length === 0) {
+    for (let y = 0; y < map.bounds.height; y++) {
+        if (lines[y].length === 0) {
             continue;
         }
 
-        Map[y] = new Array(line.length);
+        for (let x = 0; x < map.bounds.width; x++) {
+            const char = lines[y][x];
 
-        for (let x = 0; x < line.length; x++) {
-            Map[y][x] = line[x];
+            if (char === '.') {
+                continue;
+            }
+
+            map.antennae.push({id: char, x: x, y: y});
         }
-
-        y++;
     }
 
     runParts.map((part, i) => {
@@ -58,7 +65,7 @@ fs.readFile(file, 'utf8', (err, fileData) => {
 
         console.time(`Part ${i} time`);
 
-        part(ops);
+        part(map);
 
         console.timeEnd(`Part ${i} time`);
     });

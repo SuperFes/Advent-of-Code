@@ -36,7 +36,13 @@ fs.readFile(file, 'utf8', (err, fileData) => {
     data = fileData.split(/\n/);
 
     runParts.map((part, i) => {
-        part(data);
+        const partNum = i + 1;
+
+        console.time(`Part ${i} time`);
+
+        part(ops);
+
+        console.timeEnd(`Part ${i} time`);
     });
 
     console.timeEnd('Execution time');
