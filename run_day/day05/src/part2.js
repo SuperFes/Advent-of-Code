@@ -65,7 +65,7 @@ function printUpdates(Updates, Rules) {
     return MiddlePageNos;
 }
 
-export default function part1(lines = []) {
+export default function part2(lines = []) {
     let Middles = 0;
 
     let Rules   = {};

@@ -62,7 +62,7 @@ function getOppositeDir(antenna, pair, antinode = null) {
     return antinode;
 }
 
-export default function part1(map = {}) {
+export default function part2(map = {}) {
     for (const antenna of map.antennae) {
         const pairs = map.antennae.filter((otherAntenna) => {
             return otherAntenna.id === antenna.id;

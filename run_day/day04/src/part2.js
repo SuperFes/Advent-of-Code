@@ -56,7 +56,7 @@ function scannerXXX(lines) {
     return Hits;
 }
 
-export default function part1(lines = []) {
+export default function part2(lines = []) {
     const Tramps = scannerXXX(lines);
 
     console.log(`Number of X-MAS is: ${Tramps}`);

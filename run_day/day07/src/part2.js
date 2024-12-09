@@ -38,7 +38,7 @@ function mathIt(test, els, math, currentPath = "") {
     return 0;
 }
 
-export default function part1(ops = []) {
+export default function part2(ops = []) {
     let possibleOps = 0;
 
     for (const val in ops) {
