@@ -139,7 +139,7 @@ function walkUntilUndefined(map, Knight) {
     return Squares;
 }
 
-export default function part2(map = []) {
+export default function OnALongPier(map = []) {
     let squares = 0;
 
     let Knight = {x: -1, y: -1, found: false, dir: 'Up'};

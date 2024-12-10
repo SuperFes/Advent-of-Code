@@ -33,24 +33,42 @@ fs.readFile(file, 'utf8', (err, fileData) => {
         return;
     }
 
-    data = fileData.split(/\n/i);
+    const data = String(fileData).trim();
 
-    let Map = new Array(data.length - 1);
+    let Files = [];
 
-    let y = 0;
+    let id = 0;
+    let position = 0;
 
-    for (const line of data) {
-        if (line.length === 0) {
-            continue;
+    for (let d = 0; d < data.length; d += 2) {
+        let fileSize = parseInt(data.charAt(d));
+        let freeSize = parseInt(data.charAt(d + 1));
+
+        if (isNaN(fileSize)) {
+            break;
         }
 
-        Map[y] = new Array(line.length);
-
-        for (let x = 0; x < line.length; x++) {
-            Map[y][x] = line[x];
+        if (isNaN(freeSize)) {
+            freeSize = 0;
         }
 
-        y++;
+        Files.push({
+            id: id,
+            position: position,
+            size: fileSize,
+        });
+
+        position += fileSize + freeSize;
+
+        id++;
+    }
+
+    let Blocks = new Array(position).fill(null);
+
+    for (const file of Files) {
+        for (let p = file.position; p < file.position + file.size; p++) {
+            Blocks[p] = file.id;
+        }
     }
 
     let partNum = 0;
@@ -60,10 +78,10 @@ fs.readFile(file, 'utf8', (err, fileData) => {
 
         console.time(`Part ${partNum} time`);
 
-        part(Map);
+        part(Files, Blocks);
 
         console.timeEnd(`Part ${partNum} time`);
-    }
+    };
 
     console.timeEnd('Execution time');
 });

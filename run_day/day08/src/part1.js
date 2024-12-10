@@ -24,7 +24,7 @@ function getOppositeDir(antenna, pair) {
     return antinode;
 }
 
-export default function part1(map = {}) {
+export default function ToweringInferno(map = {}) {
     // console.debug(map);
 
     for (const antenna of map.antennae) {

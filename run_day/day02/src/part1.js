@@ -1,4 +1,4 @@
-export default function part1(lines = []) {
+export default function Fusion(lines = []) {
     let Dir   = 0;
     let Safe  = 0;
     let Level = 0;

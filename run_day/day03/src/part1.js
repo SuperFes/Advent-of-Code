@@ -1,4 +1,4 @@
-export default function part1(lines = []) {
+export default function Visit(lines = []) {
     let Product = 0;
 
     lines.map((line, i) => {

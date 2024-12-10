@@ -1,4 +1,4 @@
-export default function part2(lines = []) {
+export default function Mull(lines = []) {
     let Product = 0;
 
     let copy = true;

@@ -40,7 +40,7 @@ fs.readFile(file, 'utf8', (err, fileData) => {
 
         console.time(`Part ${i} time`);
 
-        part(ops);
+        part(data);
 
         console.timeEnd(`Part ${i} time`);
     });

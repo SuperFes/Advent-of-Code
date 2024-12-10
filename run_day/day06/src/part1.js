@@ -44,7 +44,7 @@ function walkUntilUndefined(map, Knight) {
     }
 }
 
-export default function part1(map = []) {
+export default function TakeAShortWalk(map = []) {
     let MapPoints = 0;
 
     let Knight = {x: -1, y: -1, found: false, dir: 'Up'};

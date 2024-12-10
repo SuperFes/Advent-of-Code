@@ -38,7 +38,7 @@ function CheckPath(Levels) {
     }
 }
 
-export default function part2(lines = []) {
+export default function Fission(lines = []) {
     let Safe = 0;
 
     lines.map((line, i) => {
