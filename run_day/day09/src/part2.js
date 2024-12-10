@@ -49,6 +49,8 @@ export default function DeFrag(files, blocks = []) {
         for (let p = 0; p < file.size; p++) {
             pBlocks[file.position + p] = null;
         }
+
+        file.position = space - file.size;
     }
 
     let pos = 0;
