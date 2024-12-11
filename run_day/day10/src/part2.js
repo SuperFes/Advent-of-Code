@@ -1,4 +1,4 @@
-export default function StrapIn(Map, Ayes) {
+export default function StrapOn(Map, Ayes) {
     // console.debug(Map, Ayes);
 
     let Graph = {};
