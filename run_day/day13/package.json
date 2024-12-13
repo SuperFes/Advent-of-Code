@@ -12,6 +12,7 @@
     "description": "",
     "dependencies": {
         "-": "^0.0.1",
+        "cli-color": "^2.0.4",
         "commander": "^12.1.0",
         "nerdamer": "^1.1.13"
     }

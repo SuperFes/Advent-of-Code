@@ -1,14 +1,15 @@
 import nerdamer from 'nerdamer/all.js';
+import clc      from 'cli-color';
 
 export default function CheckingTheList(machines = {}) {
+    const title = clc.xterm(196).bold;
+
     let TotalTokens = 0;
 
     nerdamer.set('SOLUTIONS_AS_OBJECT', true);
 
     for (const machine of machines) {
         const name = machine['Name'];
-
-        console.log(name);
 
         const instructions = machine;
 
@@ -34,19 +35,18 @@ export default function CheckingTheList(machines = {}) {
         );
 
         if (Solve.a.toString().includes('.') || Solve.b.toString().includes('.')) {
-            console.log(`No solution found =(`);
+            continue;
         }
-        else {
-            const ACost = ButtonA['Cost'] * Solve.a;
-            const BCost = ButtonB['Cost'] * Solve.b;
 
-            console.log(`A: ${Solve.a}, B: ${Solve.b}`);
+        const ACost = ButtonA['Cost'] * Solve.a;
+        const BCost = ButtonB['Cost'] * Solve.b;
 
-            TotalTokens += ACost + BCost;
-        }
+        console.log(title(name), clc.xterm(228)((ACost + BCost).toLocaleString()), `tokens`);
+
+        TotalTokens += ACost + BCost;
     }
 
-    console.log(`Total tokens spent: ${TotalTokens}`);
+    console.log(clc.xterm(159).bold(`Total tokens spent:`), clc.xterm(228).italic.bold(TotalTokens.toLocaleString()));
 
     return true;
 }
