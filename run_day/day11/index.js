@@ -40,11 +40,11 @@ fs.readFile(file, 'utf8', (err, fileData) => {
     runParts.map((part, i) => {
         const partNum = i + 1;
 
-        console.time(`Part ${i} time`);
+        console.time(`Part ${partNum} time`);
 
         part(Stones);
 
-        console.timeEnd(`Part ${i} time`);
+        console.timeEnd(`Part ${partNum} time`);
     });
 
     console.timeEnd('Execution time');

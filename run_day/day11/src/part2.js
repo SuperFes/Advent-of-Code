@@ -1,5 +1,6 @@
 export default function BluntAndAPancake(stones = []) {
     let Stones = {};
+    let NextStones = {};
 
     for (let i = 0; i < stones.length; i++) {
         const stone = stones[i];
@@ -13,18 +14,16 @@ export default function BluntAndAPancake(stones = []) {
     }
 
     let setStone = (stone, count) => {
-        if (!NewStones[stone]) {
-            NewStones[stone] = count;
+        if (!NextStones[stone]) {
+            NextStones[stone] = count;
         }
         else {
-            NewStones[stone] += count;
+            NextStones[stone] += count;
         }
     }
 
-    let NewStones = {};
-
     for (let r = 0; r < 75; r++) {
-        console.time(`Itteration ${r + 1}`);
+        // console.time(`Itteration ${r + 1}`);
 
         for (const stone in Stones) {
             const Count = Stones[stone];
@@ -46,11 +45,11 @@ export default function BluntAndAPancake(stones = []) {
             }
         }
 
-        Stones = NewStones;
+        Stones = NextStones;
 
-        NewStones = {};
+        NextStones = {};
 
-        console.timeEnd(`Itteration ${r + 1}`);
+        // console.timeEnd(`Itteration ${r + 1}`);
     }
 
     let StoneCount = 0;
