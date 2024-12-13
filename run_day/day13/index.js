@@ -116,10 +116,14 @@ fs.readFile(file, 'utf8', (err, fileData) => {
 
         name += Adjectives[Math.floor(Math.random() * Adjectives.length)];
         name += ' ';
+        name += Verbs[Math.floor(Math.random() * Verbs.length)];
+        name += ' ';
         name += Nouns[Math.floor(Math.random() * Nouns.length)];
 
-        name += ': ';
-        name += Phrases[Math.floor(Math.random() * Phrases.length)];
+        if (Math.random() > 0.5) {
+            name += ': ';
+            name += Phrases[Math.floor(Math.random() * Phrases.length)];
+        }
 
         return name;
     }
