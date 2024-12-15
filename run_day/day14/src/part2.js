@@ -93,6 +93,9 @@ export default function EasterEgg(Map, Robots) {
 //
 // //            PrintMap(Map, Robots);
 //         }
+
+        // PrintMap(Map, Robots, 0);
+        // break;
     }
 
     console.debug(clc.bold.red(move.toLocaleString()));
