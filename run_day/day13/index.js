@@ -109,8 +109,6 @@ fs.readFile(file, 'utf8', (err, fileData) => {
 
     data = fileData.split(/\n\n/i);
 
-    let Inc = 0;
-
     let ClawMachineName = () => {
         let name = '';
 
@@ -149,7 +147,7 @@ fs.readFile(file, 'utf8', (err, fileData) => {
             const Vals = {};
 
             values.split(', ').map((val) => {
-                const [variable, op, value] = val.split(/(\+|=)/);
+                const [variable, op, value] = val.split(/([+=])/);
 
                 Vals[variable] = {
                     op      : op,

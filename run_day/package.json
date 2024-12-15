@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "index.js",
     "bin": {
-        "run_day": "./index.js",
+        "run_day": "./index.js"
     },
     "scripts": {},
     "type": "module",
@@ -12,6 +12,7 @@
     "license": "ISC",
     "description": "",
     "dependencies": {
+        "cli-color": "^2.0.4",
         "commander": "^12.1.0"
     }
 }
