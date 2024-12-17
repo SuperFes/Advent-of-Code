@@ -75,96 +75,92 @@ export default function ReindeerInAHalfShell(Map) {
         let left  = pathData.ajd['left'];
         let right = pathData.ajd['right'];
 
-        if (up !== undefined && (!up.used.up || up.cost >= cost)) {
-            let newCost = cost + stepCost;
+        if (up !== undefined && (!up.used.up || up.cost > cost - 1000)) {
+            if (dir !== 'down') {
+                let newCost = cost + stepCost;
 
-            if (dir === 'down') {
-                newCost += turnCost * 2;
-            }
-            else if (dir !== 'up') {
-                newCost += turnCost;
-            }
-
-            up.cost = newCost;
-
-            paths.push({
-                    node : `${up.x},${up.y}`,
-                    dir  : 'up',
-                    cost : up.cost,
-                    steps: path.steps.concat(`${up.x},${up.y}`),
+                if (dir !== 'up') {
+                    newCost += turnCost;
                 }
-            );
 
-            up.used.up = true;
+                up.cost = newCost;
+
+                paths.push({
+                        node : `${up.x},${up.y}`,
+                        dir  : 'up',
+                        cost : up.cost,
+                        steps: path.steps.concat(`${up.x},${up.y}`),
+                    }
+                );
+
+                up.used.up = true;
+            }
         }
 
-        if (down !== undefined && (!down.used.down || down.cost >= cost)) {
-            let newCost = cost + stepCost;
+        if (down !== undefined && (!down.used.down || down.cost > cost - 1000)) {
+            if (dir !== 'up') {
+                let newCost = cost + stepCost;
 
-            if (dir === 'up') {
-                newCost += turnCost * 2;
-            }
-            else if (dir !== 'down') {
-                newCost += turnCost;
-            }
-
-            down.cost = newCost;
-
-            paths.push({
-                    node : `${down.x},${down.y}`,
-                    dir  : 'down',
-                    cost : down.cost,
-                    steps: path.steps.concat(`${down.x},${down.y}`),
+                if (dir !== 'down') {
+                    newCost += turnCost;
                 }
-            );
 
-            down.used.down = true;
+                down.cost = newCost;
+
+                paths.push({
+                        node : `${down.x},${down.y}`,
+                        dir  : 'down',
+                        cost : down.cost,
+                        steps: path.steps.concat(`${down.x},${down.y}`),
+                    }
+                );
+
+                down.used.down = true;
+            }
         }
 
-        if (left !== undefined && (!left.used.left || left.cost >= cost)) {
-            let newCost = cost + stepCost;
+        if (left !== undefined && (!left.used.left || left.cost > cost - 1000)) {
+            if (dir !== 'right') {
+                let newCost = cost + stepCost;
 
-            if (dir === 'right') {
-                newCost += turnCost * 2;
-            }
-            else if (dir !== 'left') {
-                newCost += turnCost;
-            }
-
-            left.cost = newCost;
-
-            paths.push({
-                    node : `${left.x},${left.y}`,
-                    dir  : 'left',
-                    cost : left.cost,
-                    steps: path.steps.concat(`${left.x},${left.y}`),
+                if (dir !== 'left') {
+                    newCost += turnCost;
                 }
-            );
 
-            left.used.left = true;
+                left.cost = newCost;
+
+                paths.push({
+                        node : `${left.x},${left.y}`,
+                        dir  : 'left',
+                        cost : left.cost,
+                        steps: path.steps.concat(`${left.x},${left.y}`),
+                    }
+                );
+
+                left.used.left = true;
+            }
         }
 
-        if (right !== undefined && (!right.used.right || right.cost >= cost)) {
-            let newCost = cost + stepCost;
+        if (right !== undefined && (!right.used.right || right.cost > cost - 1000)) {
+            if (dir !== 'left') {
+                let newCost = cost + stepCost;
 
-            if (dir === 'left') {
-                newCost += turnCost * 2;
-            }
-            else if (dir !== 'right') {
-                newCost += turnCost;
-            }
-
-            right.cost = newCost;
-
-            paths.push({
-                    node : `${right.x},${right.y}`,
-                    dir  : 'right',
-                    cost : right.cost,
-                    steps: path.steps.concat(`${right.x},${right.y}`),
+                if (dir !== 'right') {
+                    newCost += turnCost;
                 }
-            );
 
-            right.used.right = true;
+                right.cost = newCost;
+
+                paths.push({
+                        node : `${right.x},${right.y}`,
+                        dir  : 'right',
+                        cost : right.cost,
+                        steps: path.steps.concat(`${right.x},${right.y}`),
+                    }
+                );
+
+                right.used.right = true;
+            }
         }
     }
 
