@@ -7,8 +7,6 @@ export default function RunDown(Map) {
         Map.time = i;
     }
 
-    PrintMap(Map);
-
     function MakeGraph() {
         for (let y = 0; y <= Map.bounds.height; y++) {
             for (let x = 0; x <= Map.bounds.width; x++) {
