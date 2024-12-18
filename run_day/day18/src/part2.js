@@ -134,8 +134,6 @@ export default function RunDownAFewThousandTimes(Map) {
 
             console.log(`Byte at time ${Map.time + 1}:`, clc.yellow(`${byteAtTime.x},${byteAtTime.y}`));
 
-            console.log(`Steps: ${Map.path.length - 1}`);
-
             break;
         }
     }
