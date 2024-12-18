@@ -4,8 +4,6 @@ import CCPU from "./lib/Emulate.js";
 export default function CrashOverload(Registers, Program) {
     let Loopt = 0;
 
-    let ByteMask = 0b0111; // Only the last 3 bits are used
-
     let LowestFuck = BigInt(0b111111111111111111111111111111111111111111111111);
 
     const BytePops = [
@@ -36,7 +34,6 @@ export default function CrashOverload(Registers, Program) {
     const ProgramString = Program.join(',');
 
     let Fuckle = BigInt(0b0000);
-    let FuckIt = 0;
 
     let Matches = Array(16).fill(0, 0, Program.length);
     let Value   = Array(16).fill(0, 0, Program.length);
@@ -98,31 +95,6 @@ export default function CrashOverload(Registers, Program) {
             }
         }
     }
-
-    console.log(clc.red('Fuck it'), FuckIt);
-
-    // Program: 2,4,1,5,7,5,1,6,0,3,4,0,5,5,3,0
-    const TryBinary = 0b011111001000000;
-
-    FuckIt = BigInt(TryBinary);
-
-    Registers.a = FuckIt;
-
-    const CPU = new CCPU(Registers);
-
-    CPU.Run(Program);
-
-    CPU.Print();
-
-    console.log(clc.red(Program.join(',')));
-
-    // if (outP.join(',') === Program.join(',')) {
-    //     console.log(clc.red('Program crashed'), Fuckle);
-    //
-    //     console.log(clc.green('Program completed successfully'));
-    //
-    //     break;
-    // }
 
     return true;
 }
