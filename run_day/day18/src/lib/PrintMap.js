@@ -7,19 +7,19 @@ export default function PrintMap(Map, id = null) {
             const path = Map.path.includes(`${x}:${y}`);
 
             if (x === 0 && y === 0) {
-                process.stdout.write(clc.yellow.bold.italic('S'));
+                process.stdout.write(clc.yellow.bgXterm(29).bold.italic('󰬚'));
             }
             else if (x === Map.bounds.width && y === Map.bounds.height) {
-                process.stdout.write(clc.yellow.bold.italic('E'));
+                process.stdout.write(clc.yellow.bgXterm(29).bold.italic('󰬌'));
             }
             else if (path) {
-                process.stdout.write(clc.bold('O'));
+                process.stdout.write(clc.bgXterm(29).bold('X'));
             }
             else if (byte) {
-                process.stdout.write(clc.red('#'));
+                process.stdout.write(clc.xterm(207).bgXterm(29)('█'));
             }
             else {
-                process.stdout.write(clc.green('.'));
+                process.stdout.write(clc.bgXterm(29).green('󱔐'));
             }
         }
 
